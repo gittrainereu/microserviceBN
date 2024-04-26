@@ -1,0 +1,26 @@
+# adjust
+# 1. server-url / use data from last step 
+# 2. your-name / use your own namespace here
+name: CI/CD
+on: push
+jobs:
+  deploy:
+    name: Deploy
+    # needs: [ test, build ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set the Kubernetes context
+        uses: azure/k8s-set-context@v2
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBERNETES_CONFIG }}
+
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Deploy to the Kubernetes cluster
+        uses: azure/k8s-deploy@v5
+        with:
+          namespace: barbaranamespace
+          manifests: |
+            manifests
