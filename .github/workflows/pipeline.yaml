@@ -1,6 +1,7 @@
 # adjust
 # 1. server-url / use data from last step 
 # 2. your-name / use your own namespace here
+# Test
 name: CI/CD
 on: push
 jobs:
